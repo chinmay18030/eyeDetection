@@ -9,6 +9,9 @@ class EyeDetector:
         self.haar_cascade = cv.CascadeClassifier('eye.xml')
         self.no_of_eye = no_of_eye
     def find_eye(self,img):
+        gray = cv.cvtColor(img,cv.BGR2GRAY)
+        faces_rect = self.haar_cascade.detectMultiScale(
+        gray, scaleFactor=1.3, minNeighbors=10)
         if self.no_of_eye == 1:
             faces_rect = faces_rect[
         for x, y, w, h in faces_rect:
@@ -21,7 +24,9 @@ class EyeDetector:
             cv.circle(frame, (x1, y2), 3, (0, 225, 0), cv.FILLED)
             cv.circle(frame, (x1, y2), 3, (0, 225, 0), cv.FILLED)
             cv.circle(frame, (x2, y1), 3, (0, 225, 0), cv.FILLED
-    def findPosition(
+    def findPosition(self,img):
+        lmlist = []
+        lmlist.append([self.cx,self.cy])
 
    
 cap.release()
